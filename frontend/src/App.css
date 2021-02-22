@@ -1,0 +1,115 @@
+body{
+  background-color: #1d1b26;
+}
+
+h1, h2, h3, h4, h5, p, label, span, strike{
+  font-family: 'Montserrat', sans-serif;
+}
+
+h2{
+  margin-bottom: 1rem;
+}
+
+#patient-container{
+  max-width:800px;
+  margin:0 auto;
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+  background-color: #fff;
+  
+  margin-bottom:100px;
+
+  justify-content: space-around;
+  align-items: flex-start;
+}
+
+#form-wrapper{
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0rem;
+  border-bottom: 1px solid  #e9e9e9;
+  background-color: #fff;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.25);
+  padding:40px; 
+}
+
+#upload{
+  width: 50%;
+}
+
+#submit{
+  font-family: 'Montserrat', sans-serif;
+  background-color: #fd2d55;
+  padding: 15px 40px;
+  margin-top:1rem;
+  border-radius: 4px;
+  border:0;
+  color: #fff;
+  width: 100%;
+  font-size: 16px;
+}
+
+#submit:hover{
+  background-color: #f50231;
+}
+
+#back{
+  font-family: 'Montserrat', sans-serif;
+  background-color: #fd2d55;
+  padding: 15px 40px;
+  margin-top:1rem;
+  border-radius: 4px;
+  border:0;
+  color: #fff;
+  width: 100%;
+  font-size: 16px;
+}
+
+#back:hover{
+  background-color: #f50231;
+}
+
+input label {
+  display: block;
+}
+
+.label, 
+section > label {
+  text-align: left;
+  display: block;
+  margin-bottom: 5px;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-control {
+  display: block;
+  box-sizing:border-box;
+  padding: 10px 15px;
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+.required-field:after {
+  content: " *";
+  color: #f50231;
+}
+
+.flex-wrapper.section{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 20px;
+}
+
+.patient-wrapper{
+    cursor: pointer;
+    border-bottom: 1px solid  #e9e9e9;
+    color: #686868;
+    margin:5px;
+    padding:20px;
+}
+
+.patient-wrapper:hover{
+    background-color: #F0F0F0;
+}
