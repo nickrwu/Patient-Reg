@@ -87,7 +87,7 @@ class App extends Component{
   handleSubmit = (e) => {
     e.preventDefault();
     
-    let url = "http://nw-patient-reg.herokuapp.com/api/patients/"
+    let url = "https://nw-patient-reg.herokuapp.com/api/patients/"
 
     let form_data = new FormData();
 

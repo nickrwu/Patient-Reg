@@ -31,7 +31,7 @@ if os.path.isfile(dotenv_file):
 SECRET_KEY = os.getenv('SECRET_KEY', 'Optional default value')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1:8000', 'localhost', 'nw-patient-reg.herokuapp.com']
 
@@ -50,7 +50,6 @@ INSTALLED_APPS = [
     'corsheaders',
     'rest_framework',
     
-    'api',
     'patient',
 
 ]
@@ -147,8 +146,10 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+REACT_APP_DIR = BASE_DIR / '../../frontend'
+
 STATICFILES_DIRS = [
-    BASE_DIR / 'build/static'
+    REACT_APP_DIR / 'build/static'
 ]
 
 STATIC_ROOT = BASE_DIR / 'static'

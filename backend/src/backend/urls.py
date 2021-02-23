@@ -26,4 +26,5 @@ urlpatterns = [
 
     # Specifying URL path for API
     path('api/', include(router.urls)),
+    path('', include('patient.urls'))
 ]

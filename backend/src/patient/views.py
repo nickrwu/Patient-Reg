@@ -2,6 +2,8 @@ from django.views import View
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseNotFound
 import os
+import logging
+from backend.settings import REACT_APP_DIR
 
 from rest_framework.decorators import action
 from rest_framework.parsers import MultiPartParser, FormParser
@@ -11,13 +13,15 @@ from rest_framework import status, viewsets
 from .models import Patient
 from .serializers import PatientSerializer
 
-# Create your views here.
+index_file_path = os.path.join(REACT_APP_DIR, 'build/index.html')
 
+# Create your views here.
 class PatientView(viewsets.ModelViewSet):
 	parser_classes = (MultiPartParser, FormParser)
 
 	queryset = Patient.objects.all().order_by('-id')
 	serializer_class = PatientSerializer
+	http_method_names = ['get', 'post',]
 
 	@action(detail=True, methods=['POST'])
 	def post(self, request):
@@ -45,3 +49,10 @@ class Assets(View):
                 return HttpResponse(file.read(), content_type='application/javascript')
         else:
             return HttpResponseNotFound()
+
+def ReactView(request):
+    try:
+        with open(index_file_path) as file:
+            return HttpResponse(file.read())
+    except FileNotFoundError:
+        logging.exception('Production build of app not found')
