@@ -4,11 +4,13 @@ import FormSuccess from "./components/FormSuccess";
 
 import axios from "axios";
 
-
 import setHours from "date-fns/setHours";
 import setMinutes from "date-fns/setMinutes";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+
+axios.defaults.xsrfCookieName = 'csrftoken'
+axios.defaults.xsrfHeaderName = 'X-CSRFToken'
 
 class App extends Component{
   constructor(props) {

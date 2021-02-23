@@ -83,7 +83,7 @@ ROOT_URLCONF = 'backend.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': BASE_DIR / 'build',
+        'DIRS': [str(BASE_DIR / 'build')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -102,12 +102,8 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': str(BASE_DIR / "db.sqlite3"),
-    }
-}
+DATABASES = {}
+
 
 DATABASES['default'] = dj_database_url.config(conn_max_age=600)
 
