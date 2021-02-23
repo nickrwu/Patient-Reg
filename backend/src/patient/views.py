@@ -1,5 +1,7 @@
+from django.views import View
 from django.shortcuts import render
-from django.http import JsonResponse
+from django.http import HttpResponse, HttpResponseNotFound
+import os
 
 from rest_framework.views import APIView
 from rest_framework.decorators import api_view, parser_classes
@@ -29,63 +31,13 @@ class PatientView(APIView):
 			print('error', patients_serializer.errors)
 			return Response(patients_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+class Assets(View):
 
+    def get(self, _request, filename):
+        path = os.path.join(os.path.dirname(__file__), 'static', filename)
 
-# @api_view(['GET'])
-# @parser_classes([MultiPartParser, FormParser])
-# def apiOverview(request):
-# 	api_urls = {
-# 		'List':'/patient-list/',
-# 		'Info View':'/patient-info/<str:pk>/',
-# 		'Create':'/patient-create/',
-# 		'Update':'/patient-update/<str:pk>/',
-# 		'Delete':'/patient-delete/<str:pk>/',
-# 		}
-
-# 	return Response(api_urls)
-
-# @api_view(['GET'])
-# def patientList(request):
-# 	patients = Patient.objects.all().order_by('-id')
-# 	serializer = PatientSerializer(patients, many=True)
-# 	return Response(serializer.data)
-
-# @api_view(['GET'])
-# def patientInfo(request, pk):
-# 	patients = Patient.objects.get(id=pk)
-# 	serializer = PatientSerializer(patients, many=False)
-# 	return Response(serializer.data)
-
-
-# @api_view(['POST'])
-# @parser_classes([MultiPartParser, FormParser])
-# def patientCreate(request):
-# 	serializer = PatientSerializer(data=request.data)
-
-# 	if serializer.is_valid():
-# 	    serializer.save()
-# 	    return Response(status=status.HTTP_201_CREATED)
-	
-# 	return Response({
-#     'data': serializer.data,
-#     'message': 'Account could not be created with received data.',
-#     'errors' : serializer.errors # for example
-# }, status=status.HTTP_400_BAD_REQUEST)
-
-# @api_view(['POST'])
-# def patientUpdate(request, pk):
-# 	patient = Patient.objects.get(id=pk)
-# 	serializer = PatientSerializer(instance=task, data=request.data)
-
-# 	if serializer.is_valid():
-# 		serializer.save()
-
-# 	return Response(serializer.data)
-
-
-# @api_view(['DELETE'])
-# def patientDelete(request, pk):
-# 	patient = Patient.objects.get(id=pk)
-# 	patient.delete()
-
-# 	return Response('Info successfully delete!')
+        if os.path.isfile(path):
+            with open(path, 'rb') as file:
+                return HttpResponse(file.read(), content_type='application/javascript')
+        else:
+            return HttpResponseNotFound()
