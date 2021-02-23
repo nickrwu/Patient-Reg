@@ -6,6 +6,11 @@
   "author": "Nick Wu",
   "license": "",
   "private": false,
+
+  "engines": {
+    "node": "14.6.0",
+    "npm": "6.14.9"
+  },
   "scripts": {
     "heroku-prebuild": "NODE_ENV=production cd frontend/ && yarn install && yarn build && cd .."
   },
