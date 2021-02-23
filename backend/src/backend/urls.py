@@ -16,24 +16,14 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
-from patient import views
+from patient.views import PatientView
 
 router = routers.DefaultRouter()
-# router.register(r'patients', views.PatientView, 'patient')
+router.register(r'patients', PatientView, basename='patient')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
 
     # Specifying URL path for API
-    # path('api/', include(router.urls)),
-
-    path('api/', include('patient.urls')),
-
-    # path('api/', views.apiOverview, name="api-overview"),
-    # path('api/patient-list/', views.patientList, name="patient-list"),
-	# path('api/patient-info/<str:pk>/', views.patientInfo, name="patient-detail"),
-	# path('api/patient-create/', views.patientCreate, name="patient-create"),
-
-	# path('api/patient-update/<str:pk>/', views.patientUpdate, name="patient-update"),
-	# path('api/patient-delete/<str:pk>/', views.patientDelete, name="patient-delete"),
+    path('api/', include(router.urls)),
 ]

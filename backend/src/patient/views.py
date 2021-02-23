@@ -3,26 +3,24 @@ from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseNotFound
 import os
 
-from rest_framework.views import APIView
-from rest_framework.decorators import api_view, parser_classes
+from rest_framework.decorators import action
 from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.response import Response
-from rest_framework import status
+from rest_framework import status, viewsets
 
 from .models import Patient
-from .serializers import *
+from .serializers import PatientSerializer
 
 # Create your views here.
 
-class PatientView(APIView):
+class PatientView(viewsets.ModelViewSet):
 	parser_classes = (MultiPartParser, FormParser)
 
-	def get(self, request, *args, **kwargs):
-		patients = Patient.objects.all().order_by('-id')
-		serializer = PatientSerializer(patients, many=True)
-		return Response(serializer.data)
+	queryset = Patient.objects.all().order_by('-id')
+	serializer_class = PatientSerializer
 
-	def post(self, request, *args, **kwargs):
+	@action(detail=True, methods=['POST'])
+	def post(self, request):
 		patients_serializer = PatientSerializer(data=request.data)
 		if patients_serializer.is_valid():
 			patients_serializer.save()
@@ -30,6 +28,12 @@ class PatientView(APIView):
 		else:
 			print('error', patients_serializer.errors)
 			return Response(patients_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+	@action(detail=False)
+	def get(self, request):
+		patients = Patient.objects.all().order_by('-id')
+		serializer = PatientSerializer(patientss, many=True)
+		return Response(serializer.data)
 
 class Assets(View):
 

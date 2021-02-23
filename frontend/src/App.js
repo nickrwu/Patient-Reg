@@ -85,7 +85,7 @@ class App extends Component{
   handleSubmit = (e) => {
     e.preventDefault();
     
-    let url = "http://127.0.0.1:8000/api/patients/"
+    let url = "http://nw-patient-reg.herokuapp.com/api/patients/"
 
     let form_data = new FormData();
 
@@ -178,6 +178,9 @@ class App extends Component{
                       id="dob"
                       name="dob"
                       placeholderText="yyyy-mm-dd" 
+                      showMonthDropdown
+                      showYearDropdown
+                      dropdownMode="select"
                       dateFormat="yyyy-MM-dd"
                       required
                     />
