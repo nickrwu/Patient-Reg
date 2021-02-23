@@ -40,6 +40,10 @@ class App extends Component{
     this.handleSubmit = this.handleSubmit.bind(this)
   };
 
+  componentDidMount() {
+    document.title = 'Patient Registration';
+  }
+
   handleChange = (e) => {
     this.setState({activeInfo:{
       ...this.state.activeInfo,
