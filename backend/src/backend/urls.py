@@ -17,6 +17,8 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
 from patient.views import PatientView
+from django.conf import settings
+from django.conf.urls.static import static
 
 router = routers.DefaultRouter()
 router.register(r'patients', PatientView, basename='patient')
@@ -27,4 +29,4 @@ urlpatterns = [
     # Specifying URL path for API
     path('api/', include(router.urls)),
     path('', include('patient.urls'))
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
